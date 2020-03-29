@@ -11,21 +11,14 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet var userTF: UITextField!
     
-    let toolBar = UIToolbar()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-        toolBar.sizeToFit()
         
-
+        userTF.setToolBar()
         userTF.showHidePassword()
         
         
-        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneBttonClicked))
-        toolBar.setItems([done], animated: true)
-
-        userTF.inputAccessoryView = toolBar
-
-        // Do any additional setup after loading the view.
     }
 
     @objc func doneBttonClicked() {
@@ -37,6 +30,18 @@ class ViewController: UIViewController {
 
 
 extension UITextField {
+    
+    func setToolBar() {
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneBttonClicked))
+        toolBar.setItems([done], animated: true)
+        self.inputAccessoryView = toolBar
+    }
+    
+    @objc func doneBttonClicked() {
+        self.resignFirstResponder()
+    }
     
     func showHidePassword() {
         let eye = UIButton(frame: CGRect(x: self.frame.width - 30, y: 0, width: 25, height: 30))
@@ -57,7 +62,5 @@ extension UITextField {
             self.isSecureTextEntry = false
             eye.setBackgroundImage(UIImage(named: "closeEye"), for: .normal)
         }
-        
-        
-    }
+     }
 }
