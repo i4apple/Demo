@@ -8,35 +8,64 @@
 
 import UIKit
 
+
+
 class ViewController: UIViewController {
     @IBOutlet var userTF: UITextField!
     
-   
+    @IBOutlet var firstTF: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         userTF.setToolBar()
+        firstTF.setToolBar()
         userTF.showHidePassword()
-        
-        
     }
 
     @objc func doneBttonClicked() {
         userTF.resignFirstResponder()
     }
-
+    
+    
 }
+
 
 
 
 extension UITextField {
     
+    var selectedTag: Int {
+        get {
+            return self.tag
+        }
+    }
+    
     func setToolBar() {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
+        
+        let previos = UIBarButtonItem(title: "Previos", style: .plain, target: nil, action: #selector(previousTextField))
+        
+        let next = UIBarButtonItem(title: "Next", style: .plain, target: nil, action: #selector(nextTextField))
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let done = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneBttonClicked))
-        toolBar.setItems([done], animated: true)
+        toolBar.setItems([previos,next,flexSpace,done], animated: true)
+        self.rightViewMode = .always
         self.inputAccessoryView = toolBar
+    }
+   
+    
+    @objc func previousTextField() {
+        if self.tag == selectedTag {
+//            self.resignFirstResponder()
+//            let tf = self.tag - 1
+//                [
+            
+        }
+    }
+    
+    @objc func nextTextField() {
+        self.resignFirstResponder()
     }
     
     @objc func doneBttonClicked() {
