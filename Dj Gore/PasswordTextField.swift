@@ -24,7 +24,7 @@ class PasswordTextField: UITextField {
         let passwordImageButton = UIButton(type: .custom)
         passwordImageButton.setImage(UIImage(named: PasswordRightViewImage.closedEyes), for: .normal)
         passwordImageButton.frame = CGRect(x: 10, y: 5, width: 20, height: 20)
-        passwordImageButton.addTarget(self, action: #selector(onEyeTapEvent(_sender:)), for: .touchUpInside)
+        passwordImageButton.addTarget(self, action: #selector(onPasswordEyeTapEvent(_sender:)), for: .touchUpInside)
 
         let buttonContainerView: UIView = UIView(frame:CGRect(x: 20, y: 0, width: 30, height: 30))
         buttonContainerView.addSubview(passwordImageButton)
@@ -33,7 +33,7 @@ class PasswordTextField: UITextField {
         self.rightViewMode = .always
     }
 
-    @objc private func onEyeTapEvent(_sender: UIButton)
+    @objc private func onPasswordEyeTapEvent(_sender: UIButton)
     {
         if (_sender.tag == 0) // user wants to see what password they entered
         {
